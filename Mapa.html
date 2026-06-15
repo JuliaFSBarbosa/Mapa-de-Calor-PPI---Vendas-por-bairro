@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_0c4119d212492b73358e09701c63bad1 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+<div style="position: fixed; top: 15px; left: 50%; transform: translateX(-50%);
+     background-color: white; padding: 10px 20px; border-radius: 8px;
+     box-shadow: 0 2px 8px rgba(0,0,0,0.3); z-index: 1000; text-align: center;">
+    <b style="font-size:15px; font-family:Arial">Mapa de Calor — Vendas por Bairro</b><br>
+    <span style="font-size:11px; color:#666">Frederico Westphalen, RS — 2024 | Use o painel para alternar camadas</span>
+</div>
+    
+            <div class="folium-map" id="map_0c4119d212492b73358e09701c63bad1" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_0c4119d212492b73358e09701c63bad1 = L.map(
+                "map_0c4119d212492b73358e09701c63bad1",
+                {
+                    center: [-27.3604, -53.3962],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_792d0818fcc716b1ae67288c752e09c6 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_792d0818fcc716b1ae67288c752e09c6.addTo(map_0c4119d212492b73358e09701c63bad1);
+        
+    
+            var feature_group_63e479314fd7e2e15372c934b1725c25 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_041c4fbed42424446edc1986636bf29c = L.heatLayer(
+                [[-27.392, -53.438, 22213], [-27.359, -53.394, 64], [-27.375367, -53.424083, 514], [-27.368181, -53.393675, 757], [-27.366, -53.406, 259], [-27.350644, -53.383297, 2150], [-27.364694, -53.389503, 2016], [-27.359494, -53.407394, 7431], [-27.346328, -53.398103, 2680], [-27.3604, -53.391389, 1543], [-27.352589, -53.402828, 4262], [-27.3591, -53.39625, 271671], [-27.3623, -53.4047, 295], [-27.353494, -53.388936, 1742], [-27.347092, -53.391506, 725], [-27.367192, -53.400939, 6941], [-27.387053, -53.401197, 1919], [-27.359167, -53.394444, 1], [-27.346444, -53.378783, 1214], [-27.351614, -53.279164, 301], [-27.422556, -53.41845, 89]],
+                {
+  "minOpacity": 0.4,
+  "maxZoom": 18,
+  "radius": 40,
+  "blur": 30,
+  "gradient": {
+  0.2: "#ffffb2",
+  0.4: "#fecc5c",
+  0.6: "#fd8d3c",
+  0.8: "#f03b20",
+  1.0: "#bd0026",
+},
+}
+            );
+        
+    
+            heat_map_041c4fbed42424446edc1986636bf29c.addTo(feature_group_63e479314fd7e2e15372c934b1725c25);
+        
+    
+            feature_group_63e479314fd7e2e15372c934b1725c25.addTo(map_0c4119d212492b73358e09701c63bad1);
+        
+    
+            var feature_group_902b03457836012324146152cd8042c2 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var heat_map_ee07518107260a69c8ca051799341015 = L.heatLayer(
+                [[-27.392, -53.438, 3640962.69], [-27.359, -53.394, 6616.74], [-27.375367, -53.424083, 30077.96], [-27.368181, -53.393675, 66964.3], [-27.366, -53.406, 46790.5], [-27.350644, -53.383297, 217472.66], [-27.364694, -53.389503, 197059.42], [-27.359494, -53.407394, 685797.62], [-27.346328, -53.398103, 202596.78], [-27.3604, -53.391389, 129050.36], [-27.352589, -53.402828, 498132.31], [-27.3591, -53.39625, 17293209.92], [-27.3623, -53.4047, 27431.1], [-27.353494, -53.388936, 184872.01], [-27.347092, -53.391506, 83071.0], [-27.367192, -53.400939, 856219.56], [-27.387053, -53.401197, 124696.47], [-27.359167, -53.394444, 19.83], [-27.346444, -53.378783, 101443.85], [-27.351614, -53.279164, 70347.21], [-27.422556, -53.41845, 16339.8]],
+                {
+  "minOpacity": 0.4,
+  "maxZoom": 18,
+  "radius": 40,
+  "blur": 30,
+  "gradient": {
+  0.2: "#edf8fb",
+  0.4: "#b2e2e2",
+  0.6: "#66c2a4",
+  0.8: "#2ca25f",
+  1.0: "#006d2c",
+},
+}
+            );
+        
+    
+            heat_map_ee07518107260a69c8ca051799341015.addTo(feature_group_902b03457836012324146152cd8042c2);
+        
+    
+            var feature_group_07f6ec7c3ef4e131bdfb587634168cb1 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_7469dd77e9ef9632a1ff34c5f4626f7d = L.circleMarker(
+                [-27.392, -53.438],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_c95535fdb22278853e64a864dfa2c9ab = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_afbd40fd9c0d11d5cfe34f8df077c28a = $(`<div id="html_afbd40fd9c0d11d5cfe34f8df077c28a" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>INTERIOR</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>22,213</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 3,640,962.69</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 163.91</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_c95535fdb22278853e64a864dfa2c9ab.setContent(html_afbd40fd9c0d11d5cfe34f8df077c28a);
+            
+        
+
+        circle_marker_7469dd77e9ef9632a1ff34c5f4626f7d.bindPopup(popup_c95535fdb22278853e64a864dfa2c9ab)
+        ;
+
+        
+    
+    
+            circle_marker_7469dd77e9ef9632a1ff34c5f4626f7d.bindTooltip(
+                `<div>
+                     <b>INTERIOR</b> | 22,213 vendas | R$ 3.640.962,69
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cd5b56971e4e576a30c4e7cc84d99444 = L.circleMarker(
+                [-27.359, -53.394],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_ad79dbe28445711430e3229591ad26cb = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3d520d4c27c83a6c779f9f50111fc677 = $(`<div id="html_3d520d4c27c83a6c779f9f50111fc677" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>AVAMAU</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>64</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 6,616.74</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 103.39</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_ad79dbe28445711430e3229591ad26cb.setContent(html_3d520d4c27c83a6c779f9f50111fc677);
+            
+        
+
+        circle_marker_cd5b56971e4e576a30c4e7cc84d99444.bindPopup(popup_ad79dbe28445711430e3229591ad26cb)
+        ;
+
+        
+    
+    
+            circle_marker_cd5b56971e4e576a30c4e7cc84d99444.bindTooltip(
+                `<div>
+                     <b>AVAMAU</b> | 64 vendas | R$ 6.616,74
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3a5d1b4be9e82aac62d46d3960c607c0 = L.circleMarker(
+                [-27.375367, -53.424083],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_647bad095d483be54d0f422e8b27690b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_37d1b7716be81add91d3fb26bb7629bf = $(`<div id="html_37d1b7716be81add91d3fb26bb7629bf" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>FAGUENSE</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>514</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 30,077.96</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 58.52</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_647bad095d483be54d0f422e8b27690b.setContent(html_37d1b7716be81add91d3fb26bb7629bf);
+            
+        
+
+        circle_marker_3a5d1b4be9e82aac62d46d3960c607c0.bindPopup(popup_647bad095d483be54d0f422e8b27690b)
+        ;
+
+        
+    
+    
+            circle_marker_3a5d1b4be9e82aac62d46d3960c607c0.bindTooltip(
+                `<div>
+                     <b>FAGUENSE</b> | 514 vendas | R$ 30.077,96
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_72f5e60db3764be3680cc4afa4e20b50 = L.circleMarker(
+                [-27.368181, -53.393675],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_ab7b2c8fd81cd21ce9b6e69a6114484d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_13f2991d4026530e6c8b8af8c57642c7 = $(`<div id="html_13f2991d4026530e6c8b8af8c57642c7" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>PANOSSO</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>757</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 66,964.30</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 88.46</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_ab7b2c8fd81cd21ce9b6e69a6114484d.setContent(html_13f2991d4026530e6c8b8af8c57642c7);
+            
+        
+
+        circle_marker_72f5e60db3764be3680cc4afa4e20b50.bindPopup(popup_ab7b2c8fd81cd21ce9b6e69a6114484d)
+        ;
+
+        
+    
+    
+            circle_marker_72f5e60db3764be3680cc4afa4e20b50.bindTooltip(
+                `<div>
+                     <b>PANOSSO</b> | 757 vendas | R$ 66.964,30
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5ce0489ca934234007e53d3d5546e3e3 = L.circleMarker(
+                [-27.366, -53.406],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_29359e6d81b80616a034249872bd6a98 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e2cd36c47da60cf98daff3fd04f47ddd = $(`<div id="html_e2cd36c47da60cf98daff3fd04f47ddd" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>BOA ESPERANCA</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>259</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 46,790.50</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 180.66</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_29359e6d81b80616a034249872bd6a98.setContent(html_e2cd36c47da60cf98daff3fd04f47ddd);
+            
+        
+
+        circle_marker_5ce0489ca934234007e53d3d5546e3e3.bindPopup(popup_29359e6d81b80616a034249872bd6a98)
+        ;
+
+        
+    
+    
+            circle_marker_5ce0489ca934234007e53d3d5546e3e3.bindTooltip(
+                `<div>
+                     <b>BOA ESPERANCA</b> | 259 vendas | R$ 46.790,50
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_034b19fbe3e1b95d36d19ec23b872f93 = L.circleMarker(
+                [-27.350644, -53.383297],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_360d21b94062e4141f0730d0e21d8a58 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3f17958cff5b51e09aa17708e3066331 = $(`<div id="html_3f17958cff5b51e09aa17708e3066331" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>SAO FRANCISCO DE PAULA</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>2,150</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 217,472.66</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 101.15</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_360d21b94062e4141f0730d0e21d8a58.setContent(html_3f17958cff5b51e09aa17708e3066331);
+            
+        
+
+        circle_marker_034b19fbe3e1b95d36d19ec23b872f93.bindPopup(popup_360d21b94062e4141f0730d0e21d8a58)
+        ;
+
+        
+    
+    
+            circle_marker_034b19fbe3e1b95d36d19ec23b872f93.bindTooltip(
+                `<div>
+                     <b>SAO FRANCISCO DE PAULA</b> | 2,150 vendas | R$ 217.472,66
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_842f794f7922f52b3d6df470704db4fb = L.circleMarker(
+                [-27.364694, -53.389503],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_2d350a41576dc9931a7e21ae781d1d9a = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f1aef36c35ba5fc3e811d95d619a9c2b = $(`<div id="html_f1aef36c35ba5fc3e811d95d619a9c2b" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>JARDIM PRIMAVERA</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>2,016</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 197,059.42</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 97.75</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_2d350a41576dc9931a7e21ae781d1d9a.setContent(html_f1aef36c35ba5fc3e811d95d619a9c2b);
+            
+        
+
+        circle_marker_842f794f7922f52b3d6df470704db4fb.bindPopup(popup_2d350a41576dc9931a7e21ae781d1d9a)
+        ;
+
+        
+    
+    
+            circle_marker_842f794f7922f52b3d6df470704db4fb.bindTooltip(
+                `<div>
+                     <b>JARDIM PRIMAVERA</b> | 2,016 vendas | R$ 197.059,42
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ddfcddb8175965917bff66794b94f1dc = L.circleMarker(
+                [-27.359494, -53.407394],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_6126f3bf4e22652f06b7174bd51c5a36 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_83cde22cc2b574393fb13cf043124ebe = $(`<div id="html_83cde22cc2b574393fb13cf043124ebe" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>ITAPAJE</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>7,431</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 685,797.62</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 92.29</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_6126f3bf4e22652f06b7174bd51c5a36.setContent(html_83cde22cc2b574393fb13cf043124ebe);
+            
+        
+
+        circle_marker_ddfcddb8175965917bff66794b94f1dc.bindPopup(popup_6126f3bf4e22652f06b7174bd51c5a36)
+        ;
+
+        
+    
+    
+            circle_marker_ddfcddb8175965917bff66794b94f1dc.bindTooltip(
+                `<div>
+                     <b>ITAPAJE</b> | 7,431 vendas | R$ 685.797,62
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_22bb3f1171d8713b71148bc9d26fc7a9 = L.circleMarker(
+                [-27.346328, -53.398103],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_ac455471933b34f2b6b16688158b39fa = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_bf32793b8b04bfd5f81390ce6b1bd8bc = $(`<div id="html_bf32793b8b04bfd5f81390ce6b1bd8bc" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>SANTO ANTONIO</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>2,680</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 202,596.78</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 75.60</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_ac455471933b34f2b6b16688158b39fa.setContent(html_bf32793b8b04bfd5f81390ce6b1bd8bc);
+            
+        
+
+        circle_marker_22bb3f1171d8713b71148bc9d26fc7a9.bindPopup(popup_ac455471933b34f2b6b16688158b39fa)
+        ;
+
+        
+    
+    
+            circle_marker_22bb3f1171d8713b71148bc9d26fc7a9.bindTooltip(
+                `<div>
+                     <b>SANTO ANTONIO</b> | 2,680 vendas | R$ 202.596,78
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_181bac8e2ac4f7b1d36bda1c555c3645 = L.circleMarker(
+                [-27.3604, -53.391389],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_62182ab95a6ce1011d3cd1b29c9a62da = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_e789c1d5cb83abf6a6a307a509b325db = $(`<div id="html_e789c1d5cb83abf6a6a307a509b325db" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>IPIRANGA</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>1,543</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 129,050.36</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 83.64</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_62182ab95a6ce1011d3cd1b29c9a62da.setContent(html_e789c1d5cb83abf6a6a307a509b325db);
+            
+        
+
+        circle_marker_181bac8e2ac4f7b1d36bda1c555c3645.bindPopup(popup_62182ab95a6ce1011d3cd1b29c9a62da)
+        ;
+
+        
+    
+    
+            circle_marker_181bac8e2ac4f7b1d36bda1c555c3645.bindTooltip(
+                `<div>
+                     <b>IPIRANGA</b> | 1,543 vendas | R$ 129.050,36
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_55ae76a50338674caccff5042d09fd11 = L.circleMarker(
+                [-27.352589, -53.402828],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_08645b5403345e33fbc7953887409ea4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_a658636e57be617c7e92def8c8e0a996 = $(`<div id="html_a658636e57be617c7e92def8c8e0a996" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>FATIMA</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>4,262</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 498,132.31</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 116.88</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_08645b5403345e33fbc7953887409ea4.setContent(html_a658636e57be617c7e92def8c8e0a996);
+            
+        
+
+        circle_marker_55ae76a50338674caccff5042d09fd11.bindPopup(popup_08645b5403345e33fbc7953887409ea4)
+        ;
+
+        
+    
+    
+            circle_marker_55ae76a50338674caccff5042d09fd11.bindTooltip(
+                `<div>
+                     <b>FATIMA</b> | 4,262 vendas | R$ 498.132,31
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8b8264004edebcfadd81a4771e2c755a = L.circleMarker(
+                [-27.3591, -53.39625],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_bde9e377cde1619f4aedd023846eaf0c = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_f031a18a3a4e242364437331bc7b9dae = $(`<div id="html_f031a18a3a4e242364437331bc7b9dae" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>CENTRO</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>271,671</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 17,293,209.92</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 63.65</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_bde9e377cde1619f4aedd023846eaf0c.setContent(html_f031a18a3a4e242364437331bc7b9dae);
+            
+        
+
+        circle_marker_8b8264004edebcfadd81a4771e2c755a.bindPopup(popup_bde9e377cde1619f4aedd023846eaf0c)
+        ;
+
+        
+    
+    
+            circle_marker_8b8264004edebcfadd81a4771e2c755a.bindTooltip(
+                `<div>
+                     <b>CENTRO</b> | 271,671 vendas | R$ 17.293.209,92
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5e9fb373fe761d4eec0a263f4aa29d13 = L.circleMarker(
+                [-27.3623, -53.4047],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_d2d499e3d4eecc9b93074421d3b285e4 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1a82650945bb14a7c51a1237eb70448a = $(`<div id="html_1a82650945bb14a7c51a1237eb70448a" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>NUCLEO</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>295</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 27,431.10</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 92.99</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_d2d499e3d4eecc9b93074421d3b285e4.setContent(html_1a82650945bb14a7c51a1237eb70448a);
+            
+        
+
+        circle_marker_5e9fb373fe761d4eec0a263f4aa29d13.bindPopup(popup_d2d499e3d4eecc9b93074421d3b285e4)
+        ;
+
+        
+    
+    
+            circle_marker_5e9fb373fe761d4eec0a263f4aa29d13.bindTooltip(
+                `<div>
+                     <b>NUCLEO</b> | 295 vendas | R$ 27.431,10
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c643837e0d6884a5420d6945ef071350 = L.circleMarker(
+                [-27.353494, -53.388936],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_5515edee1816723761ca6f8c8d32216b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_4a4e32e83d057b4961f1f1f3092a8470 = $(`<div id="html_4a4e32e83d057b4961f1f1f3092a8470" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>SANTO INACIO</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>1,742</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 184,872.01</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 106.13</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_5515edee1816723761ca6f8c8d32216b.setContent(html_4a4e32e83d057b4961f1f1f3092a8470);
+            
+        
+
+        circle_marker_c643837e0d6884a5420d6945ef071350.bindPopup(popup_5515edee1816723761ca6f8c8d32216b)
+        ;
+
+        
+    
+    
+            circle_marker_c643837e0d6884a5420d6945ef071350.bindTooltip(
+                `<div>
+                     <b>SANTO INACIO</b> | 1,742 vendas | R$ 184.872,01
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_86e3382cf01ee9700b29e04935ad4196 = L.circleMarker(
+                [-27.347092, -53.391506],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_bdd83165982778669b78bc4dbc441435 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0a06a417b2659b6096546aa605666caf = $(`<div id="html_0a06a417b2659b6096546aa605666caf" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>BARRIL</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>725</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 83,071.00</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 114.58</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_bdd83165982778669b78bc4dbc441435.setContent(html_0a06a417b2659b6096546aa605666caf);
+            
+        
+
+        circle_marker_86e3382cf01ee9700b29e04935ad4196.bindPopup(popup_bdd83165982778669b78bc4dbc441435)
+        ;
+
+        
+    
+    
+            circle_marker_86e3382cf01ee9700b29e04935ad4196.bindTooltip(
+                `<div>
+                     <b>BARRIL</b> | 725 vendas | R$ 83.071,00
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_136292cc63d61e9e90e290a84d48459d = L.circleMarker(
+                [-27.367192, -53.400939],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_309d4ad7ff0eed3a78aa9938ecaca4b7 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8eeb08f2362e4a8e0618e7552bad9f0d = $(`<div id="html_8eeb08f2362e4a8e0618e7552bad9f0d" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>APARECIDA</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>6,941</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 856,219.56</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 123.36</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_309d4ad7ff0eed3a78aa9938ecaca4b7.setContent(html_8eeb08f2362e4a8e0618e7552bad9f0d);
+            
+        
+
+        circle_marker_136292cc63d61e9e90e290a84d48459d.bindPopup(popup_309d4ad7ff0eed3a78aa9938ecaca4b7)
+        ;
+
+        
+    
+    
+            circle_marker_136292cc63d61e9e90e290a84d48459d.bindTooltip(
+                `<div>
+                     <b>APARECIDA</b> | 6,941 vendas | R$ 856.219,56
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f18cf75015dd8c8853513efd434afa26 = L.circleMarker(
+                [-27.387053, -53.401197],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_fe141b894216d4d8f548b8e1ebe0d689 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_6b250cb3c12e71efc2f6f7a03dfd8e96 = $(`<div id="html_6b250cb3c12e71efc2f6f7a03dfd8e96" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>SAO CRISTOVAO</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>1,919</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 124,696.47</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 64.98</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_fe141b894216d4d8f548b8e1ebe0d689.setContent(html_6b250cb3c12e71efc2f6f7a03dfd8e96);
+            
+        
+
+        circle_marker_f18cf75015dd8c8853513efd434afa26.bindPopup(popup_fe141b894216d4d8f548b8e1ebe0d689)
+        ;
+
+        
+    
+    
+            circle_marker_f18cf75015dd8c8853513efd434afa26.bindTooltip(
+                `<div>
+                     <b>SAO CRISTOVAO</b> | 1,919 vendas | R$ 124.696,47
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3e46bcff8d15633854fef6f1e4a70d74 = L.circleMarker(
+                [-27.359167, -53.394444],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_a69ba0813733a956d69ac02476099d36 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_8914a6655f6f802f024f53d07c39f32e = $(`<div id="html_8914a6655f6f802f024f53d07c39f32e" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>SAO PAULO</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>1</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 19.83</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 19.83</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_a69ba0813733a956d69ac02476099d36.setContent(html_8914a6655f6f802f024f53d07c39f32e);
+            
+        
+
+        circle_marker_3e46bcff8d15633854fef6f1e4a70d74.bindPopup(popup_a69ba0813733a956d69ac02476099d36)
+        ;
+
+        
+    
+    
+            circle_marker_3e46bcff8d15633854fef6f1e4a70d74.bindTooltip(
+                `<div>
+                     <b>SAO PAULO</b> | 1 vendas | R$ 19,83
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5ba3a3535d97155476c6b17bbb507b98 = L.circleMarker(
+                [-27.346444, -53.378783],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_7ae651636178e7bb7ac26e3d92c69624 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_84bb8f96728fe67a42f654f1cd067845 = $(`<div id="html_84bb8f96728fe67a42f654f1cd067845" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>DISTRITO INDUSTRIAL</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>1,214</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 101,443.85</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 83.56</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_7ae651636178e7bb7ac26e3d92c69624.setContent(html_84bb8f96728fe67a42f654f1cd067845);
+            
+        
+
+        circle_marker_5ba3a3535d97155476c6b17bbb507b98.bindPopup(popup_7ae651636178e7bb7ac26e3d92c69624)
+        ;
+
+        
+    
+    
+            circle_marker_5ba3a3535d97155476c6b17bbb507b98.bindTooltip(
+                `<div>
+                     <b>DISTRITO INDUSTRIAL</b> | 1,214 vendas | R$ 101.443,85
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b5534b35c1dc0d88db09b099dbc117e0 = L.circleMarker(
+                [-27.351614, -53.279164],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_6d558f5ac3250e7c66d7b20918d13ccf = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_3269232a8861bfb6ef78c62dac42c130 = $(`<div id="html_3269232a8861bfb6ef78c62dac42c130" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>DISTRITO DE CASTELINHO</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>301</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 70,347.21</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 233.71</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_6d558f5ac3250e7c66d7b20918d13ccf.setContent(html_3269232a8861bfb6ef78c62dac42c130);
+            
+        
+
+        circle_marker_b5534b35c1dc0d88db09b099dbc117e0.bindPopup(popup_6d558f5ac3250e7c66d7b20918d13ccf)
+        ;
+
+        
+    
+    
+            circle_marker_b5534b35c1dc0d88db09b099dbc117e0.bindTooltip(
+                `<div>
+                     <b>DISTRITO DE CASTELINHO</b> | 301 vendas | R$ 70.347,21
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ee26270048523b55d739cd591189abf2 = L.circleMarker(
+                [-27.422556, -53.41845],
+                {"bubblingMouseEvents": true, "color": "#333333", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_07f6ec7c3ef4e131bdfb587634168cb1);
+        
+    
+        var popup_c756d306f51b3221e5765e7fd4c8711b = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_0fb2034336240fd21fc5a2a5ee9a7edb = $(`<div id="html_0fb2034336240fd21fc5a2a5ee9a7edb" style="width: 100.0%; height: 100.0%;">             <div style='font-family:Arial; min-width:200px'>                 <b style='font-size:14px'>DISTRITO DE OSVALDO CRUZ</b><br>                 <hr style='margin:5px 0'>                 <table style='width:100%; font-size:12px'>                     <tr><td>🛒 Qtd Vendas</td><td><b>89</b></td></tr>                     <tr><td>💰 Faturamento</td><td><b>R$ 16,339.80</b></td></tr>                     <tr><td>🎯 Ticket Médio</td><td><b>R$ 183.59</b></td></tr>                 </table>             </div>             </div>`)[0];
+                popup_c756d306f51b3221e5765e7fd4c8711b.setContent(html_0fb2034336240fd21fc5a2a5ee9a7edb);
+            
+        
+
+        circle_marker_ee26270048523b55d739cd591189abf2.bindPopup(popup_c756d306f51b3221e5765e7fd4c8711b)
+        ;
+
+        
+    
+    
+            circle_marker_ee26270048523b55d739cd591189abf2.bindTooltip(
+                `<div>
+                     <b>DISTRITO DE OSVALDO CRUZ</b> | 89 vendas | R$ 16.339,80
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_07f6ec7c3ef4e131bdfb587634168cb1.addTo(map_0c4119d212492b73358e09701c63bad1);
+        
+    
+            var layer_control_312be3a8e1cda1abd78b8d1905f327ef_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_792d0818fcc716b1ae67288c752e09c6,
+                },
+                overlays :  {
+                    "\ud83d\uded2 Quantidade de Vendas" : feature_group_63e479314fd7e2e15372c934b1725c25,
+                    "\ud83d\udcb0 Faturamento" : feature_group_902b03457836012324146152cd8042c2,
+                    "\ud83d\udccd Bairros" : feature_group_07f6ec7c3ef4e131bdfb587634168cb1,
+                },
+            };
+            let layer_control_312be3a8e1cda1abd78b8d1905f327ef = L.control.layers(
+                layer_control_312be3a8e1cda1abd78b8d1905f327ef_layers.base_layers,
+                layer_control_312be3a8e1cda1abd78b8d1905f327ef_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_0c4119d212492b73358e09701c63bad1);
+
+        
+</script>
+</html>
